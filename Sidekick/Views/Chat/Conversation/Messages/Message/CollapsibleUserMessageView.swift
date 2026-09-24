@@ -69,9 +69,9 @@ struct CollapsibleUserMessageView: View {
                     VStack(spacing: 0) {
                         LinearGradient(
                             gradient: Gradient(stops: [
-                                .init(color: Color(nsColor: .textBackgroundColor).opacity(0), location: 0),
-                                .init(color: Color(nsColor: .textBackgroundColor).opacity(0.95), location: 0.5),
-                                .init(color: Color(nsColor: .textBackgroundColor), location: 1)
+                                .init(color: Color(nsColor: .controlBackgroundColor).opacity(0), location: 0),
+                                .init(color: Color(nsColor: .controlBackgroundColor).opacity(0.95), location: 0.5),
+                                .init(color: Color(nsColor: .controlBackgroundColor), location: 1)
                             ]),
                             startPoint: .top,
                             endPoint: .bottom
@@ -153,5 +153,4 @@ struct CollapsibleUserMessageView: View {
         return CGFloat(self.collapsedLineCount) * lineHeight
     }
 }
-
 

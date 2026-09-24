@@ -9,34 +9,15 @@ import SwiftUI
 
 struct MessageBackgroundView: View {
 	
-	private let cornerRadius: CGFloat = 13
-	private let borderWidth: CGFloat = 0.5
+	private let cornerRadius: CGFloat = 12
 	
 	var body: some View {
-		unevenRoundedRectangle(cornerRadius)
-			.fill(
-				Color(nsColor: .textBackgroundColor)
-			)
-			.padding(borderWidth)
-			.background {
-				unevenRoundedRectangle(cornerRadius + borderWidth)
-					.fill(Color.secondary)
-					.opacity(0.5)
+		RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+			.fill(Color(nsColor: .controlBackgroundColor))
+			.overlay {
+				RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
+					.strokeBorder(Color.primary.opacity(0.06), lineWidth: 1)
 			}
-	}
-	
-	private func unevenRoundedRectangle(
-		_ cornerRadius: CGFloat
-	) -> some Shape {
-		UnevenRoundedRectangle(
-			cornerRadii: .init(
-				topLeading: 0,
-				bottomLeading: cornerRadius,
-				bottomTrailing: cornerRadius,
-				topTrailing: cornerRadius
-			),
-			style: .circular
-		)
 	}
 	
 }

@@ -23,6 +23,8 @@ struct ConversationNameEditor: View {
 		Group {
 			if !isEditing {
 				Text(conversation.title)
+					.font(.callout)
+					.lineLimit(1)
 					.contentTransition(.numericText())
 			} else {
                 TextField("Title", text: self.$newTitle)

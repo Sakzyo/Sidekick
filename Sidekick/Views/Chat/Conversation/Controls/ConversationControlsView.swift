@@ -15,8 +15,6 @@ struct ConversationControlsView: View {
     @Environment(ConversationManager.self) private var conversationManager
         @Environment(ConversationState.self) private var conversationState
     
-    @State private var didFinishTyping: Bool = false
-    
     @Namespace private var textFieldMoveAnimation
     
     var selectedConversation: Conversation? {
@@ -57,6 +55,9 @@ struct ConversationControlsView: View {
             Spacer()
                 .frame(maxHeight: maxHeight)
         }
+        .frame(maxWidth: .infinity)
+        .padding(.horizontal, 28)
+        .padding(.bottom, isCenteredLayout ? 0 : 18)
         .animation(
             .easeInOut(duration: 0.22),
             value: self.isCenteredLayout
@@ -111,7 +112,7 @@ struct ConversationControlsView: View {
                 inputField
             }
         }
-        .padding(.leading)
+        .frame(maxWidth: 780)
         .animation(
             .easeInOut(duration: 0.22),
             value: self.showQuickPrompts
@@ -133,22 +134,11 @@ struct ConversationControlsView: View {
     }
     
     var typedText: some View {
-        HStack(
-            spacing: 5
-        ) {
-            TypedTextView(
-                String(localized: "How can I help you?"),
-                duration: 0.6,
-                didFinish: $didFinishTyping
-            )
-            .font(.title)
-            .bold()
-            if !didFinishTyping {
-                Circle()
-                    .fill(.white)
-                    .frame(width: 15, height: 15)
-            }
-        }
+        Text("How can I help you?")
+            .font(.system(size: 26, weight: .semibold))
+            .foregroundStyle(.primary)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding(.bottom, 12)
     }
     
     var inputField: some View {

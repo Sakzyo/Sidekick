@@ -10,10 +10,6 @@ import SwiftUI
 
 struct ModelSelectorDropdown: View {
 
-    @Environment(\.colorScheme) private var colorScheme
-
-        @Environment(ConversationState.self) private var conversationState
-
     @AppStorage("endpoint") private var serverEndpoint: String = InferenceSettings.endpoint
     @Binding var serverModelName: String
     @AppStorage("serverModelHasVision") private var serverModelHasVision: Bool = InferenceSettings.serverModelHasVision
@@ -37,21 +33,6 @@ struct ModelSelectorDropdown: View {
     @State private var scrollToLocal: Bool = false
     @State private var scrollToRemote: Bool = false
     
-    var selectedExpert: Expert? {
-        guard let selectedExpertId = conversationState.selectedExpertId else {
-            return nil
-        }
-        return ExpertManager.getExpert(id: selectedExpertId)
-    }
-    
-    var toolbarTextColor: Color {
-        guard let selectedExpert = selectedExpert else {
-            return .primary
-        }
-        // Use the same logic as expert label/icon for consistency
-        return selectedExpert.color.adaptedTextColor
-    }
-    
     // Get the current model name for display
     var currentModelName: String {
         if let selectedModelName = model.selectedModelName {
@@ -63,7 +44,7 @@ struct ModelSelectorDropdown: View {
         }
     }
     
-    // Format model name for toolbar display
+    // Format model name for the composer.
     private func formatModelName(_ name: String) -> String {
         let components = parseModelIdentifier(name)
         
@@ -296,22 +277,29 @@ struct ModelSelectorDropdown: View {
         Button {
             showingDropdown.toggle()
         } label: {
-            HStack(spacing: 4) {
+            HStack(spacing: 6) {
                 Text(currentModelName)
-                    .font(.body)
-                    .fontWeight(.medium)
-                    .lineLimit(1)
-                Image(systemName: "chevron.down")
                     .font(.caption)
                     .fontWeight(.medium)
+                    .lineLimit(1)
+                    .truncationMode(.middle)
+                    .frame(maxWidth: 180, alignment: .leading)
+                Image(systemName: "chevron.down")
+                    .font(.caption2)
+                    .fontWeight(.medium)
             }
-            .foregroundStyle(toolbarTextColor)
+            .foregroundStyle(.secondary)
             .symbolRenderingMode(.monochrome)
-            .padding(.horizontal, 12)
+            .padding(.horizontal, 6)
+            .padding(.vertical, 5)
+            .contentShape(Rectangle())
         }
         .keyboardShortcut("k", modifiers: [.command])
         .buttonStyle(.plain)
-        .popover(isPresented: $showingDropdown) {
+        .help(currentModelName)
+        .accessibilityLabel(Text("Select Model"))
+        .accessibilityValue(currentModelName)
+        .popover(isPresented: $showingDropdown, arrowEdge: .bottom) {
             dropdownContent
                 .frame(width: 360, height: 480)
         }

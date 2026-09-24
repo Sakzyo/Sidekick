@@ -69,21 +69,14 @@ struct MessageView: View {
 	}
 	
     var body: some View {
-		HStack(
-			alignment: .top,
-			spacing: 0
+		VStack(
+			alignment: .leading,
+			spacing: 7
 		) {
-			message.icon
-				.padding(.trailing, 10)
-			VStack(
-				alignment: .leading,
-				spacing: 8
-			) {
-				controls
-				content
-			}
+			controls
+			content
 		}
-		.padding(.trailing)
+		.frame(maxWidth: .infinity, alignment: .leading)
 		.contentShape(Rectangle())
 		.onHover { hovering in
 			self.updateHoverState(hovering)
@@ -99,7 +92,10 @@ struct MessageView: View {
     
     var controls: some View {
         HStack {
+            Text(message.getSender() == .user ? "You" : "Sidekick")
+                .font(.caption.weight(.semibold))
             Text(timeDescription)
+                .font(.caption)
                 .foregroundStyle(.secondary)
             // Stop button stays visible even when the chip row is
             // hidden — the user needs to be able to interrupt a
@@ -232,11 +228,14 @@ struct MessageView: View {
                 )
 			}
 		}
+		.frame(maxWidth: .infinity, alignment: .leading)
 		.background {
-			MessageBackgroundView()
-				.contextMenu {
-					copyButton
-				}
+			if message.getSender() == .user {
+				MessageBackgroundView()
+			}
+		}
+		.contextMenu {
+			copyButton
 		}
 	}
 	

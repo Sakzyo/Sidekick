@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct ChatPromptEditor: View {
+struct ChatPromptEditor<Options: View>: View {
     
     @Environment(\.colorScheme) var colorScheme
     @Environment(PromptController.self) private var promptController
@@ -26,10 +26,8 @@ struct ChatPromptEditor: View {
     var useAttachments: Bool = true
     var useDictation: Bool = true
     
-    /// A `Bool` controlling whether space is reserved for options below the text field
-    var bottomOptions: Bool = false
-    
     var cornerRadius = 16.0
+    @ViewBuilder var options: () -> Options
     var rect: RoundedRectangle {
         RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
     }
@@ -38,14 +36,31 @@ struct ChatPromptEditor: View {
         if isRecording {
             return .red
         } else if isFocused {
-            return .accentColor
+            return .primary.opacity(0.28)
         }
-        return .primary
+        return .primary.opacity(0.13)
     }
     
     var body: some View {
+        VStack(alignment: .leading, spacing: 10) {
+            editor
+            options()
+                .padding(.horizontal, 12)
+        }
+        .padding(.vertical, 10)
+        .background(Color(nsColor: .textBackgroundColor))
+        .clipShape(rect)
+        .overlay(
+            rect
+                .strokeBorder(outlineColor, lineWidth: 1)
+        )
+        .shadow(color: .black.opacity(0.06), radius: 12, y: 3)
+        .animation(isFocused ? .easeIn(duration: 0.2) : .easeOut(duration: 0.0), value: isFocused)
+    }
+
+    private var editor: some View {
         @Bindable var promptController = self.promptController
-        MultilineTextField(
+        return MultilineTextField(
             text: $promptController.prompt,
             insertionPoint: $promptController.insertionPoint,
             prompt: sendDescription,
@@ -73,31 +88,6 @@ struct ChatPromptEditor: View {
             view
                 .padding(.trailing, 4)
         }
-        .if(self.bottomOptions) { view in
-            view
-                .padding(.bottom, 30)
-        }
-        .padding(.vertical, 5)
-        .cornerRadius(cornerRadius)
-        .background(
-            LinearGradient(
-                colors: [
-                    Color.textBackground,
-                    Color.textBackground.opacity(0.9),
-                    Color.textBackground.opacity(0.75),
-                    Color.textBackground.opacity(0.5)
-                ],
-                startPoint: .leading,
-                endPoint: .trailing
-            )
-        )
-        .mask(rect)
-        .overlay(
-            rect
-                .stroke(style: StrokeStyle(lineWidth: 1))
-                .foregroundStyle(outlineColor)
-        )
-        .animation(isFocused ? .easeIn(duration: 0.2) : .easeOut(duration: 0.0), value: isFocused)
     }
     
 }

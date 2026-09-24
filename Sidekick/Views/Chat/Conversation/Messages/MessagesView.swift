@@ -34,25 +34,25 @@ struct MessagesView: View {
     
     var body: some View {
         ScrollView {
-            HStack(alignment: .top) {
-                LazyVStack(alignment: .leading, spacing: 13) {
-                    Group {
-                        self.messagesView
-                        PendingMessageHost(
-                            conversationId: self.selectedConversation?.id,
-                            isActivelyScrolling: self.isActivelyScrolling
-                        ) { oldValue, newValue in
-                            self.handlePreviewVisibilityChange(
-                                oldValue: oldValue,
-                                newValue: newValue
-                            )
-                        }
+            LazyVStack(alignment: .leading, spacing: 24) {
+                Group {
+                    self.messagesView
+                    PendingMessageHost(
+                        conversationId: self.selectedConversation?.id,
+                        isActivelyScrolling: self.isActivelyScrolling
+                    ) { oldValue, newValue in
+                        self.handlePreviewVisibilityChange(
+                            oldValue: oldValue,
+                            newValue: newValue
+                        )
                     }
                 }
-                .padding(.vertical)
-                .padding(.bottom, 175)
-                Spacer()
             }
+            .frame(maxWidth: 780, alignment: .leading)
+            .frame(maxWidth: .infinity)
+            .padding(.horizontal, 28)
+            .padding(.top, 28)
+            .padding(.bottom, 175)
         }
         .background(NSScrollViewAccessor(scrollView: $scrollViewProxy))
         .onReceive(

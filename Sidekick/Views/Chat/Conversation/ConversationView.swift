@@ -14,6 +14,14 @@ struct ConversationView: View {
 	
 	@Environment(ConversationManager.self) private var conversationManager
 		@Environment(ConversationState.self) private var conversationState
+
+	private var conversationTitle: String {
+		guard let conversation = conversationState.selectedConversation,
+		      !conversation.messages.isEmpty else {
+			return String(localized: "New Chat")
+		}
+		return conversation.title
+	}
 	
 	var body: some View {
 		@Bindable var promptController = self.promptController
@@ -43,12 +51,21 @@ struct ConversationView: View {
 	}
 	
 	var messages: some View {
-		MessagesView()
-			.padding(.leading)
-			.overlay(alignment: .bottom) {
-				ConversationControlsView()
-					.padding(.trailing, 30)
+		VStack(spacing: 0) {
+			HStack {
+				Text(conversationTitle)
+					.font(.headline)
+					.lineLimit(1)
+				Spacer()
 			}
+			.padding(.horizontal, 28)
+			.padding(.vertical, 15)
+			Divider()
+			MessagesView()
+				.overlay(alignment: .bottom) {
+					ConversationControlsView()
+				}
+		}
 	}
 	
 	/// Function to add an image to the current conversation

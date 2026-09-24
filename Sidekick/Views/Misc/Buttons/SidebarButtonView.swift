@@ -17,7 +17,7 @@ struct SidebarButtonView: View {
 	var action: () -> Void
 	
 	var buttonOpacity: Double {
-		return self.isHovering ? 0.2 : 0
+		return self.isHovering ? 0.12 : 0
 	}
 	
 	var body: some View {
@@ -28,12 +28,11 @@ struct SidebarButtonView: View {
 				title,
 				systemImage: systemImage
 			)
-			.foregroundStyle(.secondary)
-			.font(.headline)
-			.fontWeight(.regular)
+			.foregroundStyle(.primary)
+			.font(.callout.weight(.medium))
             .frame(maxWidth: .infinity, alignment: .leading)
-			.padding(.horizontal, 8)
-			.padding(.vertical, 7)
+			.padding(.horizontal, 10)
+			.padding(.vertical, 9)
 			.background(
 				Color.gray.opacity(self.buttonOpacity)
 			)

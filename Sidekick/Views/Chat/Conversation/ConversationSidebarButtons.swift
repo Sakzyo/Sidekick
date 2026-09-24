@@ -12,18 +12,18 @@ struct ConversationSidebarButtons: View {
 	@Environment(LengthyTasksController.self) private var lengthyTasksController
 	@Environment(ConversationState.self) private var conversationState
 	
-    var body: some View {
+	var body: some View {
 		Group {
-			if self.lengthyTasksController.hasTasks {
-				LengthyTasksNavigationButton()
-					.buttonStyle(.plain)
-					.foregroundStyle(.secondary)
-			}
 			SidebarButtonView(
 				title: String(localized: "New Chat"),
 				systemImage: "square.and.pencil"
 			) {
 				self.conversationState.newConversation()
+			}
+			if self.lengthyTasksController.hasTasks {
+				LengthyTasksNavigationButton()
+					.buttonStyle(.plain)
+					.foregroundStyle(.secondary)
 			}
 		}
 		.padding(.leading, 5)

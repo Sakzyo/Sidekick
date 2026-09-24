@@ -10,6 +10,7 @@ import SwiftUI
 struct QuickPromptButton: View {
 	
 	@Binding var input: String
+	@State private var isHovered: Bool = false
 	
 	var prompt: QuickPrompt
 	
@@ -20,15 +21,25 @@ struct QuickPromptButton: View {
             }
 		} label: {
 			prompt.label
+				.saturation(0)
+				.font(.callout)
 				.padding(.vertical, 8)
-				.padding(.horizontal, 10)
+				.padding(.horizontal, 12)
 				.frame(
 					maxWidth: .infinity,
 					alignment: .leading
 				)
-				.frame(minHeight: 35)
+				.background {
+					RoundedRectangle(cornerRadius: 9, style: .continuous)
+						.fill(Color(nsColor: .controlBackgroundColor).opacity(isHovered ? 1 : 0.6))
+				}
+				.overlay {
+					RoundedRectangle(cornerRadius: 9, style: .continuous)
+						.strokeBorder(Color.primary.opacity(0.08), lineWidth: 1)
+				}
 		}
-		.buttonStyle(CapsuleButtonStyle())
+		.buttonStyle(.plain)
+		.onHover { isHovered = $0 }
 		.frame(maxWidth: 300)
 	}
 	

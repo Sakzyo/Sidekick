@@ -24,12 +24,8 @@ struct ConversationNavigationListView: View {
 				ConversationNameEditor(conversation: conversation)
 			}
         }
+        .listStyle(.sidebar)
         .scrollIndicators(.never)
-		.navigationSplitViewColumnWidth(
-			min: 125,
-			ideal: 175,
-			max: 225
-		)
 	}
 	
 }

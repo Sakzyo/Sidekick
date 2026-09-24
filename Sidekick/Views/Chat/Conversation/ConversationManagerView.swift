@@ -11,9 +11,6 @@ import SwiftUI
 struct ConversationManagerView: View {
     
     @Environment(\.appearsActive) private var appearsActive
-    @Environment(\.colorScheme) private var colorScheme
-    
-    @AppStorage("remoteModelName") private var serverModelName: String = InferenceSettings.serverModelName
     
     @StateObject private var model: Model = .shared
     @StateObject private var canvasController: CanvasController = .init()
@@ -29,14 +26,6 @@ struct ConversationManagerView: View {
         return ExpertManager.getExpert(id: selectedExpertId)
     }
     
-    var toolbarTextColor: Color {
-        guard let selectedExpert = selectedExpert else {
-            return .primary
-        }
-        // Use the same logic as expert label/icon for consistency
-        return selectedExpert.color.adaptedTextColor
-    }
-    
     var selectedConversation: Conversation? {
         return self.conversationState.selectedConversation
     }
@@ -49,14 +38,6 @@ struct ConversationManagerView: View {
         }
         .navigationTitle("")
         .toolbar {
-            ToolbarItemGroup(
-                placement: .navigation
-            ) {
-                // Model selector in top left
-                ModelSelectorDropdown(
-                    serverModelName: self.$serverModelName
-                )
-            }
             ToolbarItemGroup(
                 placement: .principal
             ) {
@@ -80,18 +61,6 @@ struct ConversationManagerView: View {
                 // Menu to share conversation
                 MessageShareMenu()
             }
-        }
-        .if(selectedExpert != nil) { view in
-            guard let expert = selectedExpert else {
-                return AnyView(view)
-            }
-            return AnyView(
-                view
-                    .toolbarBackground(
-                        expert.color,
-                        for: .windowToolbar
-                    )
-            )
         }
         .onChange(of: selectedExpert) {
             self.refreshSystemPrompt()
@@ -173,13 +142,33 @@ struct ConversationManagerView: View {
     var conversationList: some View {
         VStack(
             alignment: .leading,
-            spacing: 3
+            spacing: 0
         ) {
-            ConversationNavigationListView()
-            Spacer()
+            Text("Sidekick")
+                .font(.caption2.weight(.semibold))
+                .tracking(1.2)
+                .textCase(.uppercase)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, 16)
+                .padding(.top, 15)
+                .padding(.bottom, 12)
             ConversationSidebarButtons()
+                .padding(.horizontal, 10)
+                .padding(.bottom, 16)
+            Text("Conversations")
+                .font(.caption2.weight(.semibold))
+                .tracking(1)
+                .textCase(.uppercase)
+                .foregroundStyle(.secondary)
+                .padding(.horizontal, 16)
+                .padding(.bottom, 6)
+            ConversationNavigationListView()
         }
-        .padding(.vertical, 7)
+        .navigationSplitViewColumnWidth(
+            min: 220,
+            ideal: 260,
+            max: 320
+        )
     }
     
     var conversationView: some View {
@@ -204,13 +193,19 @@ struct ConversationManagerView: View {
     }
     
     var noSelectedConversation: some View {
-        HStack {
-            Text("Hit")
-            Button("Command ⌘ + N") {
+        VStack(spacing: 12) {
+            Image(systemName: "bubble.left.and.text.bubble.right")
+                .font(.system(size: 30, weight: .light))
+                .foregroundStyle(.secondary)
+            Text("New Conversation")
+                .font(.title2.weight(.semibold))
+            Button("New Chat") {
                 self.conversationState.newConversation()
             }
-            Text("to start a conversation.")
+            .buttonStyle(.borderedProminent)
+            .padding(.top, 6)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     var canvasToggle: some View {
@@ -218,7 +213,7 @@ struct ConversationManagerView: View {
             self.toggleCanvas()
         } label: {
             Label("Canvas", systemImage: "cube")
-                .foregroundStyle(toolbarTextColor)
+                .foregroundStyle(.secondary)
                 .symbolRenderingMode(.monochrome)
         }
         .disabled({

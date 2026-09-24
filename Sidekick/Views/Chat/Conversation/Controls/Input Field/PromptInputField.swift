@@ -20,6 +20,7 @@ struct PromptInputField: View {
     )
     
     @AppStorage("useCommandReturn") private var useCommandReturn: Bool = Settings.useCommandReturn
+    @AppStorage("remoteModelName") private var serverModelName: String = InferenceSettings.serverModelName
     var sendShortcutDescription: Text {
         return Text(
             Settings.SendShortcut(self.useCommandReturn).rawValue
@@ -149,21 +150,11 @@ struct PromptInputField: View {
             isFocused: self._isFocused,
             isRecording: $promptController.isRecording,
             useAttachments: true,
-            bottomOptions: true,
             cornerRadius: 22
-        )
-        .focused(self.$isFocused)
-        .submitLabel(.send)
-        .overlay(alignment: .leading) {
-            AttachmentSelectionButton { url in
-                await self.promptController.addFile(url)
-            }
-        }
-        .overlay(alignment: .trailing) {
-            DictationButton()
-        }
-        .overlay(alignment: .bottomLeading) {
-            HStack {
+        ) {
+            WrappingHStack(alignment: .leading, horizontalSpacing: 8, verticalSpacing: 8) {
+                ModelSelectorDropdown(serverModelName: self.$serverModelName)
+                    .fixedSize(horizontal: true, vertical: false)
                 if self.showReasoningToggle {
                     ReasoningToggleButton(
                         activatedFillColor: self.buttonFillColor,
@@ -181,9 +172,19 @@ struct PromptInputField: View {
                     useFunctions: $promptController.useFunctions
                 )
             }
-            .padding(.leading, 32)
-            .padding(.bottom, 10)
-            .frame(height: 25)
+        }
+        .focused(self.$isFocused)
+        .submitLabel(.send)
+        .overlay(alignment: .topLeading) {
+            AttachmentSelectionButton { url in
+                await self.promptController.addFile(url)
+            }
+            .padding(.top, 14)
+        }
+        .overlay(alignment: .topTrailing) {
+            DictationButton()
+                .padding(.top, 14)
+                .padding(.trailing, 8)
         }
         .padding([.vertical, .leading], 10)
         .onDrop(

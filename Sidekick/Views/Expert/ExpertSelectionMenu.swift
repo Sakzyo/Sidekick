@@ -33,11 +33,7 @@ struct ExpertSelectionMenu: View {
     }
     
     var toolbarTextColor: Color {
-        guard let selectedExpert = selectedExpert else {
-            return .primary
-        }
-        // Use the same logic as expert label/icon for consistency
-        return selectedExpert.color.adaptedTextColor
+        return .secondary
     }
     
     var inactiveExperts: [Expert] {
@@ -49,18 +45,14 @@ struct ExpertSelectionMenu: View {
     var createExpertsTip: CreateExpertsTip = .init()
     
     var body: some View {
-        Group {
-            prevButton
-            menu
-                .popoverTip(
-                    createExpertsTip,
-                    arrowEdge: .top
-                ) { action in
-                    // Open expert editor
-                    conversationState.isManagingExperts.toggle()
-                }
-            nextButton
-        }
+        menu
+            .popoverTip(
+                createExpertsTip,
+                arrowEdge: .top
+            ) { action in
+                // Open expert editor
+                conversationState.isManagingExperts.toggle()
+            }
     }
     
     var prevButton: some View {
@@ -88,6 +80,9 @@ struct ExpertSelectionMenu: View {
     var menu: some View {
         Menu {
             Group {
+                prevButton
+                nextButton
+                Divider()
                 selectOptions
                 if !inactiveExperts.isEmpty {
                     Divider()
@@ -134,22 +129,16 @@ struct ExpertSelectionMenu: View {
         Group {
             if selectedExpert == nil {
                 Text("Select an Expert")
-                    .bold()
-                    .padding(7)
-                    .padding(.horizontal, 2)
-                    .foregroundStyle(toolbarTextColor)
-                    .background {
-                        RoundedRectangle(cornerRadius: 8)
-                            .fill(Color.white)
-                            .opacity(0.5)
-                    }
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
             } else {
                 Label(
                     self.selectedExpert!.name,
                     systemImage: self.selectedExpert!.symbolName
                 )
                 .labelStyle(.titleAndIcon)
-                .foregroundStyle(toolbarTextColor)
+                .font(.callout)
+                .foregroundStyle(.secondary)
                 .symbolRenderingMode(.monochrome)
             }
         }
@@ -190,4 +179,3 @@ struct ExpertSelectionMenu: View {
     }
     
 }
-
