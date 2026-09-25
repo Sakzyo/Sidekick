@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MessageBackgroundView: View {
 	
-	private let cornerRadius: CGFloat = 12
+	private let cornerRadius: CGFloat = InterfaceStyle.cornerRadius
 	
 	var body: some View {
 		RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)

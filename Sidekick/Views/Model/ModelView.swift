@@ -54,7 +54,7 @@ struct ModelView: View {
 		.background(
 			alignment: .top
 		) {
-			RoundedRectangle(cornerRadius: 7)
+			InterfaceStyle.roundedRectangle
 				.fill(Color.secondary.opacity(0.2))
 				.frame(minHeight: 150, maxHeight: 200)
 		}

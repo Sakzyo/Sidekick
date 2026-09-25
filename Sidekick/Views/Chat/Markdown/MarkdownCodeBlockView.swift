@@ -140,10 +140,10 @@ struct MarkdownCodeBlockView: View {
                             .padding(.horizontal, 10)
                             .padding(.vertical, 5)
                             .background(
-                                RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                InterfaceStyle.chatButtonShape
                                     .fill(Color(nsColor: .controlBackgroundColor).opacity(0.8))
                                     .overlay(
-                                        RoundedRectangle(cornerRadius: 5, style: .continuous)
+                                        InterfaceStyle.chatButtonShape
                                             .stroke(Color.border.opacity(0.5), lineWidth: 1)
                                     )
                             )
@@ -157,10 +157,7 @@ struct MarkdownCodeBlockView: View {
         }
         .background(Color.secondaryBackground)
         .clipShape(
-            RoundedRectangle(
-                cornerRadius: 6,
-                style: .continuous
-            )
+            InterfaceStyle.roundedRectangle
         )
     }
     

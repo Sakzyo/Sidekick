@@ -67,7 +67,7 @@ struct SourceRowView: View {
 		.padding(.horizontal)
 		.padding(.vertical, 10)
 		.background {
-			RoundedRectangle(cornerRadius: 10)
+			InterfaceStyle.roundedRectangle
 				.fill(Color(nsColor: .textBackgroundColor))
 				.shadow(
 					color: shadowColor,
@@ -86,7 +86,7 @@ struct SourceRowView: View {
 				.padding(4)
 				.padding(.horizontal, 2)
 				.background {
-					Capsule()
+					InterfaceStyle.chatButtonShape
 						.stroke(lineWidth: 1)
 				}
 		}

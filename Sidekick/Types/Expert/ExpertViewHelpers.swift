@@ -42,7 +42,7 @@ extension Expert {
                 self.color.adaptedTextColor
             )
             .background {
-                RoundedRectangle(cornerRadius: 8)
+                InterfaceStyle.roundedRectangle
                     .fill(self.color)
             }
     }

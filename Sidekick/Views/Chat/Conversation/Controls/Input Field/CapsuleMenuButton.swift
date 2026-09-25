@@ -98,9 +98,9 @@ struct CapsuleMenuButton<Options: MenuOptions>: View {
     
     var capsule: some View {
         ZStack {
-            Capsule()
+            InterfaceStyle.chatButtonShape
                 .fill(self.bubbleColor)
-            Capsule()
+            InterfaceStyle.chatButtonShape
                 .stroke(
                     style: .init(
                         lineWidth: 0.3
@@ -170,7 +170,8 @@ struct MenuIcon: NSViewRepresentable {
         button.imagePosition = .imageOnly
         button.isBordered = false
         button.wantsLayer = true
-        button.layer?.cornerRadius = 6.0
+        button.layer?.cornerRadius = InterfaceStyle.chatButtonCornerRadius
+        button.layer?.cornerCurve = .continuous
         button.layer?.backgroundColor = NSColor.clear.cgColor
         button.contentTintColor = color
         button.target = context.coordinator

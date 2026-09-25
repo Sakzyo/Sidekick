@@ -1,216 +1,216 @@
 <h1 align="center">
   <p align="center">
-    <img src="https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/appIcon.png" alt="Logo" width = "200" height = "200">
+    <img src="Docs%20Images/appIcon.png" alt="Logo" width = "200" height = "200">
   </p>
   <br />
   Sidekick
 </h1>
 
 <p align="center">
-<img alt="Downloads" src="https://img.shields.io/github/downloads/johnbean393/Sidekick/total?label=Downloads" height=22.5>
-<img alt="License" src="https://img.shields.io/github/license/johnbean393/Sidekick?label=License" height=22.5>
+<img alt="Downloads" src="https://img.shields.io/github/downloads/Sakzyo/Sidekick/total?label=Downloads" height=22.5>
+<img alt="License" src="https://img.shields.io/github/license/Sakzyo/Sidekick?label=License" height=22.5>
 </p>
 
-Chat with a local LLM that can respond with information from your files, folders and websites on your Mac without installing any other software. All conversations happen offline, and your data stays secure. Sidekick is a <strong>local first</strong> application –– with a built in inference engine for local models, while accommodating OpenAI compatible APIs for additional model options.
+Sidekick is a native macOS app for chatting with local models, working with your files, and connecting to remote AI providers. It is a <strong>local first</strong> application with a built-in `llama.cpp` inference engine, so local GGUF models do not require a separate model server. Conversations and saved memories are stored on your Mac. Local inference can work offline after the required models are downloaded; remote APIs, web search, and online tools use the network and may send relevant conversation or resource content to those services.
 
-Sidekick supports modern GGUF local models such as Qwen3.5 out of the box through its built-in `llama.cpp` backend.
+This fork of [the original Sidekick](https://github.com/johnbean393/Sidekick) adds a **Codex-inspired chat interface**: a wider conversation sidebar, centered messages, a quieter toolbar, and model selection inside the chat box alongside Search, Functions, and supported reasoning controls. Press **Command-K** to choose a model or **Command-N** to start a chat. The current source includes more subtle button corners scaled to the larger chat box.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/demoScreenshot.png)
+The published release is [**v1.0.0, build 39**](https://github.com/Sakzyo/Sidekick/releases/tag/v1.0.0) for Apple Silicon and macOS 15.0 or later. The button-radius refinements described above were added after that DMG was published and are available by building the current source. Sidekick supports GGUF model families such as Qwen3.5 through its bundled backend; model size and compatibility determine what can run on your Mac.
+
+![Current Sidekick chat interface with the model selector inside the composer](Docs%20Images/Current/chat.jpg)
+
+*Screenshots show a local build of the current source, captured on 25 September 2026. The published v1.0.0 DMG predates the latest button-corner refinements.*
 
 ## Example Use
 
-Let’s say you're collecting evidence for a History paper about interactions between Aztecs and Spanish troops, and you’re looking for text about whether the Aztecs used captured Spanish weapons.
+Suppose you are collecting evidence for a History paper about interactions between Aztecs and Spanish troops, and want to find passages about captured Spanish weapons.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Experts/demoHistoryScreenshot.png)
+Create an expert with your research papers, select it from the expert menu, and ask, “Did the Aztecs use captured Spanish weapons?” Sidekick can retrieve relevant passages and use them to answer, with source references where available. Ask for quotations and page numbers, then check them against the original document.
 
-Here, you can ask Sidekick, “Did the Aztecs use captured Spanish weapons?”, and it responds with direct quotes with page numbers and a brief analysis.
-
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Experts/demoHistorySource.png)
-
-To verify Sidekick’s answer, just click on the references displayed below Sidekick’s answer, and the academic paper referenced by Sidekick immediately opens in your viewer.
+Open a reference below the answer to inspect the source in your viewer. Retrieval helps ground the response in your materials, but quotations, page numbers, and conclusions still depend on the document extraction and the selected model.
 
 ## Features
 
-Read more about Sidekick's features and how to use them [here](https://johnbean393.github.io/Sidekick/).
+The sections below describe the current app. The [original project's feature guides](Markdown/Features/) provide additional background, while [this fork's release notes](docs/releases/1.0.0.md) describe the published v1.0.0 build.
 
 ### Resource Use
 
-Sidekick accesses files, folders, and websites from your experts, which can be individually configured to contain resources related to specific areas of interest. Activating an expert allows Sidekick to fetch and reference materials as needed.
+Organize files, folders, and websites into **experts** with their own resources and instructions. Selecting an expert makes its indexed material available to the conversation.
 
-Because Sidekick uses RAG (Retrieval Augmented Generation), you can theoretically put unlimited resources into each expert, and Sidekick will still find information relevant to your request to aid its analysis.
+Sidekick uses retrieval-augmented generation (RAG) to find relevant passages instead of placing every document into each prompt. The amount of material you can use depends on available memory, storage, indexing time, and the model's context window.
 
-For example, a student might create the experts `English Literature`, `Mathematics`, `Geography`, `Computer Science` and `Physics`. In the image below, he has activated the expert `Computer Science`.
+For example, a student might create experts named `English Literature`, `Mathematics`, `Geography`, `Computer Science`, and `Physics`, then select the one relevant to the current task.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Experts/demoExpertUse.png)
+**Settings → Retrieval** controls the number of retrieved passages, surrounding context, and experimental knowledge-graph retrieval.
 
-Users can also give Sidekick access to files just by dragging them into the input field.
+![Current resource retrieval settings](Docs%20Images/Current/resources.jpg)
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Conversations/demoTemporaryResource.png)
+You can also attach files using the paperclip button or drag them into the chat box for the current conversation.
 
-Sidekick can even respond with the latest information using **web search**, speeding up research.
+The **Search** control inside the composer enables web-assisted responses. Online search requires an internet connection; provider settings may require an API key.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Web%20Search/webSearch.png)
+![Current web-search provider settings](Docs%20Images/Current/search.jpg)
 
 ### Bring Your Own API Key
 
-In addition to its core local-first capabilities, Sidekick allows you to bring your own key for OpenAI compatible APIs. This allows you to tap into additional remote models while still preserving a primarily local-first workflow.
+Use the bundled engine for local inference, or configure a server that exposes an **OpenAI-compatible API**. Choose the model from the selector inside the chat box, which lists local and remote options and supports searching model names.
 
-Sidekick ships with built-in presets for popular providers, including **OpenAI**, **Anthropic**, **Google AI Studio**, **DeepSeek**, **Groq**, **MiniMax**, **Mistral**, **xAI**, and more — just select a provider and enter your API key to get started.
+The settings include presets for **OpenAI**, **DeepSeek**, **Google AI Studio**, **Groq**, **MiniMax**, **Mistral**, **OpenRouter**, **xAI**, **Aliyun Bailian**, **Zhipu**, **Anthropic**, and local servers such as **LM Studio** and **Ollama**. A preset supplies an endpoint; successful requests still depend on that endpoint's API compatibility and the selected model. Remote inference sends the prompt and included context to the configured server.
 
 ### Function Calling
 
-Sidekick can call functions to boost the mathematical and logical capabilities of models, and to execute actions. Functions are called sequentially in a loop until a result is obtained.
+Enable **Functions** in the composer and choose the tool categories the model can use. Available tools cover files, shell commands, web access, contacts, calendars, reminders, task lists, expert resources, and Mermaid diagrams. Tool use depends on the selected model's capabilities and any required macOS permissions.
 
-For example, when asking Sidekick to calculate Q3 2025 financial metrics for Nvidia, it makes **27** tool calls, saves the CSV file and presents the results.
+The agent loop can perform multiple rounds of tool calls and run supported calls concurrently. The chat displays tool activity, results, and reasoning when the model supplies it. For example, a model can gather financial data and write a CSV file; the exact sequence and number of calls vary by task.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Function%20Calling/functionCallingFinancialMetrics.png)
+![Current function-calling settings and approval controls](Docs%20Images/Current/functions.jpg)
 
-When telling Sidekick to draft an invitation email for a birthday celebration to my friend Jean, Sidekick finds my birthday and Jean's email address from my contacts book, and creates a draft in my default email client.
+With the relevant tools and permissions enabled, Sidekick can look up a contact and open an email draft in the default mail application.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Function%20Calling/functionCallingDraftEmail.png)
-
-This enables agents running fully locally.
+These workflows can use a local model. Tools that access websites or external services still require network access.
 
 ### Deep Research
 
-Deep Research is a specific agent implemented in Sidekick to handle long horizon, multi-step research tasks.
+Deep Research handles multi-step research tasks by clarifying the request, planning sections, gathering information, drafting a report, and preparing supporting diagrams.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Deep%20Research/deepResearchProgress.png)
-
-Specify a research topic, and let Sidekick do the rest –– reading 50-80 webpages, and synthesizing information to prepare a research report.
-
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Deep%20Research/deepResearchReport.png)
+Provide a topic and the scope you want covered. Sidekick shows progress as it works through the report. The number of sources and completion time depend on the task, model, and search configuration; web research requires an internet connection.
 
 ### Memory
 
-Sidekick can now remember helpful information between conversations, making its responses more relevant and personalized. Whether you're typing, speaking, or generating images in Sidekick, it can recall details and preferences you’ve shared and use them to tailor its responses. The more you use it, the more useful it becomes, and you’ll start to notice improvements over time.
+Optional memory lets Sidekick save useful details and retrieve relevant ones in later conversations. Memory is disabled by default. Enable it in settings, and use the memory manager to review or remove saved entries. Memories are stored locally; recalled information can be included in requests to a remote model if you choose one.
 
-For example, I might tell Sidekick that I am a beginner in Python trying to create my own version of Tetris.
+For example, you might tell Sidekick that you are learning Python while building Tetris.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Memory/memoryRemember.png)
+![Current memory settings and memory-manager control](Docs%20Images/Current/memory.jpg)
 
-When I ask it about `pygame` alternatives, it makes recommendations based on my current project, Tetris.
-
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Memory/memoryUse.png)
+In a later conversation about `pygame` alternatives, a relevant saved memory can provide context about that project.
 
 ### Canvas
 
-Create, edit and preview websites, code and other textual content using Canvas.
+Use Canvas to edit and preview websites, code, and other text alongside the conversation. It keeps snapshots so you can inspect versions and copy or export content.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Canvas/canvasWebsite.png)
-
-Select parts of the text, then prompt the chatbot to perform selective edits.
-
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Canvas/canvasSelectiveEdit.png)
+Select part of the text and ask the model for a focused revision, then review the result in the editor or preview.
 
 ### Image Generation
 
-Sidekick can generate images from text, allowing you to create visual aids for your work.
+Sidekick integrates Apple's **Image Playground** for image requests on supported Macs.
 
-There are no buttons, no switches to flick, no `Image Generation` mode. Instead, a built-in CoreML model **automatically identifies** image generation prompts, and generates an image when necessary.
+A built-in Core ML classifier routes prompts toward text or image generation. When the request is ambiguous or a possible image prompt is very short, Sidekick asks which response type you want before opening the image-generation flow.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Image%20Generation/imageGeneration.png)
-
-Image generation is available on macOS 15.2 or above, and requires Apple Intelligence.
+This feature requires macOS 15.2 or later and Image Playground availability, including the necessary Apple Intelligence setup. It is separate from the selected local or remote chat model.
 
 ### Advanced Markdown Rendering
 
-Markdown is rendered beautifully in Sidekick.
+Chat responses use an embedded WebKit Markdown renderer with streaming updates, selectable text, tables, images, syntax highlighting, and mathematical notation. Long code blocks can be expanded or collapsed. Conversation sharing includes text and HTML, with image and PDF capture available through the chat capture actions.
 
 #### LaTeX
 
-Sidekick offers native LaTeX rendering for mathematical equations.
-
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Conversations/latexRendering1.png)
-
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Conversations/latexRendering2.png)
+Inline and display equations are rendered with bundled **KaTeX** in the chat renderer.
 
 #### Data Visualization
 
-Visualizations are automatically generated for tables when appropriate, with a variety of charts available, including bar charts, line charts and pie charts.
+The current chat renderer displays Markdown tables directly and supports generated images. Enable the **Diagram** function category to let the model create Mermaid diagrams, or use Canvas to work on a visualization's code and preview.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Conversations/dataVisualization1.png)
-
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Conversations/dataVisualization2.png)
-
-Charts can be dragged and dropped into third party apps.
+Diagram tools save their output as SVG files for use outside Sidekick.
 
 #### Code
 
-Code is beautifully rendered with syntax highlighting, and can be exported or copied at the click of a button.
-
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Conversations/codeExport.png)
+Fenced code blocks show a language label, syntax highlighting, a copy action, and expand/collapse controls for longer snippets. Use Canvas when you want to edit or export a code artifact.
 
 ### Fast Generation
 
-Sidekick uses `llama.cpp` as its inference backend, which is optimized to deliver lightning fast generation speeds on Apple Silicon. It also supports speculative decoding, which can further improve the generation speed.
+Sidekick runs local GGUF models through its bundled `llama.cpp` backend on Apple Silicon. Settings support speculative decoding with a compatible draft model. Generation speed and memory use depend on the model, quantization, context size, and hardware.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Local%20Models/speculativeDecodingSupport.png)
+![Current local model and speculative decoding settings](Docs%20Images/Current/local-models.jpg)
 
-Optionally, you can offload generation to speed up processing while extending the battery life of your MacBook.
+When adding a local model, the configuration sheet shows its estimated memory use and lets you choose a context length.
 
-![Screenshot](https://raw.githubusercontent.com/johnbean393/Sidekick/refs/heads/main/Docs%20Images/Features/Remote%20Models/remoteModelSettingsTop.png)
+![Current local model configuration and context-length controls](Docs%20Images/Current/model-configuration.jpg)
+
+You can also route inference to a local server or remote provider. The app tracks generation per conversation, allowing work in separate chats to continue independently.
+
+![Current remote endpoint settings with the API key concealed](Docs%20Images/Current/remote-models.jpg)
 
 ## Installation
 
 ### Requirements
 
-- A Mac with Apple Silicon
-- RAM ≥ 8 GB
+- A Mac with Apple Silicon (arm64)
+- macOS 15.0 or later
+- At least 8 GB of RAM; larger models and context windows require more memory
+- Enough free disk space for the app and any downloaded model files
 
 ### Via Homebrew
 
-```bash
-brew install --cask arcadi4/tap/sidekick
-```
+This repository does not provide a Homebrew cask for its builds. Install this fork using the GitHub release DMG below.
 
 ### Download and Setup
 
-- Follow the guide [here](https://johnbean393.github.io/Sidekick/Markdown/gettingStarted/).
+- Download `Sidekick-1.0.0-arm64.dmg` from [the v1.0.0 release](https://github.com/Sakzyo/Sidekick/releases/tag/v1.0.0). The release also includes a SHA-256 checksum file.
+- Open the DMG and drag **Sidekick** to **Applications**. This build is **ad hoc signed and not notarized**, so macOS Gatekeeper may block a downloaded copy. See the [release notes](docs/releases/1.0.0.md) for the distribution details.
+- Launch Sidekick and download a recommended model, select **Use GGUF model**, or choose **Use model server** to configure an API endpoint.
+- Click **New Chat** in the sidebar, choose a model inside the chat box, and enter a message. Use the adjacent Search and Functions controls to enable those features.
+- Build from the current source to try the button-corner refinements added after the published DMG.
 
 ## Goals
 
-The main goal of Sidekick is to make open, local, private, and contextually aware AI applications accessible to the masses.
+Sidekick aims to make local AI practical for everyday work: chat with models on your own Mac, bring relevant documents into the conversation, and choose remote services when you need them. This fork focuses on a clear native desktop interface with controls close to the message composer.
 
-Read more about our mission [here](https://johnbean393.github.io/Sidekick/Markdown/About/mission/).
+The [original project's mission](Markdown/About/mission.md) provides the background for this work.
 
 ## Developer Setup
 
 ### Requirements
 
 - A Mac with Apple Silicon
-- RAM ≥ 8 GB
+- Enough RAM and disk space for Xcode, dependencies, and any local models you plan to use
+- Xcode and its Command Line Tools; the current source was built with **Xcode 26.6**
+- Internet access for the initial Swift Package Manager dependency resolution
 
 ### Developer Setup Instructions
 
-1. Clone this repository.
-1. Run `./setup.sh <TEAM_NAME>` to change the team in the Xcode project.
-1. Open and run in Xcode.
+1. Clone this repository: `git clone https://github.com/Sakzyo/Sidekick.git`, then `cd Sidekick`.
+1. Open `Sidekick.xcodeproj`, let Xcode resolve the Swift packages, and select the **Sidekick** scheme with **My Mac** as the destination.
+1. For a signed development build, set your team in **Signing & Capabilities** and update the team prefix in `Sidekick/Sidekick.entitlements`'s `com.apple.application-identifier` to match. The optional helper updates the Xcode project's team settings: `(cd scripts && ./setup-team.sh YOUR_TEAM_ID)`.
+1. Build and run in Xcode. The project includes the local inference executables and libraries; a separate inference-server installation is not required.
+1. To create an ad hoc signed DMG from the current source, build Release and run the packaging script:
+
+   ```bash
+   xcodebuild -project Sidekick.xcodeproj -scheme Sidekick \
+     -configuration Release -destination 'platform=macOS,arch=arm64' \
+     -derivedDataPath /private/tmp/SidekickDerived \
+     CODE_SIGNING_ALLOWED=NO build
+   ./scripts/package-dmg.sh /private/tmp/SidekickDerived/Build/Products/Release/Sidekick.app
+   ```
+
+   The script verifies nested signatures, creates the DMG and checksum under `dist/`, and verifies the disk image. Its output is ad hoc signed and unnotarized.
+
+The SwiftUI interface lives under `Sidekick/Views`. Shared surface and chat-button shapes are defined in `Sidekick/Views/Styles/InterfaceStyle.swift`; the Markdown renderer and export styles are under `Sidekick/Resources/ChatMarkdownWebView`.
 
 ## Contributing
 
-Contributions are very welcome. Let's make Sidekick simple and powerful.
+Issues and pull requests are welcome at [Sakzyo/Sidekick](https://github.com/Sakzyo/Sidekick). For UI changes, describe the affected flow, include before-and-after screenshots, and check the native app after building. For model or tool issues, include the model name, provider or local setup, macOS version, and reproducible steps without sharing API keys.
 
 ## Contact
 
-Contact this repository's owner at <johnbean393@gmail.com>, or file an issue.
+For questions and bug reports about this fork, [open an issue](https://github.com/Sakzyo/Sidekick/issues). For the original project, visit [johnbean393/Sidekick](https://github.com/johnbean393/Sidekick).
 
 ## Credits
 
-This project would not be possible without the hard work of:
+This project builds on the work of:
 
-- psugihara and contributors who built [FreeChat](https://github.com/psugihara/FreeChat), which this project took heavy inspiration from
-- Georgi Gerganov for [llama.cpp](https://github.com/ggerganov/llama.cpp)
-- Alibaba for training Qwen 2.5
-- Meta for training Llama 3
-- Google for training Gemma 3
+- John Bean and the contributors to [the original Sidekick](https://github.com/johnbean393/Sidekick)
+- psugihara and contributors to [FreeChat](https://github.com/psugihara/FreeChat), an inspiration for Sidekick
+- Georgi Gerganov and contributors to [llama.cpp](https://github.com/ggml-org/llama.cpp)
+- The teams behind Qwen, Llama, Gemma, and other compatible open models
+- The maintainers of the Swift packages and bundled Markdown, highlighting, and mathematics libraries used by the app
 
 ## Star History
 
-<a href="https://star-history.com/#johnbean393/Sidekick&Date">
+<a href="https://star-history.com/#Sakzyo/Sidekick&Date">
  <picture>
-   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=johnbean393/Sidekick&type=Date&theme=dark" />
-   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=johnbean393/Sidekick&type=Date" />
-   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=johnbean393/Sidekick&type=Date" />
+   <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=Sakzyo/Sidekick&type=Date&theme=dark" />
+   <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=Sakzyo/Sidekick&type=Date" />
+   <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=Sakzyo/Sidekick&type=Date" />
  </picture>
 </a>

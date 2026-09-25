@@ -13,7 +13,7 @@ struct ChatStyle: TextFieldStyle {
 	
 	@FocusState var isFocused: Bool
 	
-	let cornerRadius = 16.0
+	let cornerRadius = InterfaceStyle.cornerRadius
 	var rect: RoundedRectangle {
 		RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
 	}
@@ -24,7 +24,7 @@ struct ChatStyle: TextFieldStyle {
 			.frame(maxWidth: .infinity)
 			.padding(EdgeInsets(top: 0, leading: 6, bottom: 0, trailing: 6))
 			.padding(8)
-			.cornerRadius(cornerRadius)
+			.clipShape(InterfaceStyle.roundedRectangle)
 			.background(
 				LinearGradient(colors: [Color.textBackground, Color.textBackground.opacity(0.5)], startPoint: .leading, endPoint: .trailing)
 			)

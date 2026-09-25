@@ -61,10 +61,10 @@ struct FunctionCallsView: View {
             .background {
                 Group {
                     if boxColor == .secondary {
-                        RoundedRectangle(cornerRadius: 7)
+                        InterfaceStyle.chatButtonShape
                             .stroke(boxColor.opacity(0.8))
                     } else {
-                        RoundedRectangle(cornerRadius: 7)
+                        InterfaceStyle.chatButtonShape
                             .fill(boxColor.opacity(0.2))
                     }
                 }

@@ -30,10 +30,7 @@ struct CapsuleButtonStyle: ButtonStyle {
 		configuration.label
 			.font(hovered ? .body.bold() : .body)
 			.background(
-				RoundedRectangle(
-					cornerSize: CGSize(width: 10, height: 10),
-					style: .continuous
-				)
+				InterfaceStyle.chatButtonShape
 				.strokeBorder(
 					hovered ? Color.primary.opacity(0) : Color.primary.opacity(0.2),
 					lineWidth: 0.5
@@ -53,10 +50,7 @@ struct CapsuleButtonStyle: ButtonStyle {
 				value: hovered
 			)
 			.clipShape(
-				RoundedRectangle(
-					cornerSize: CGSize(width: 10, height: 10),
-					style: .continuous
-				)
+				InterfaceStyle.chatButtonShape
 			)
 	}
 	

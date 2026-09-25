@@ -17,7 +17,7 @@ struct WebsiteRowView: View {
         HStack(spacing: 12) {
             Favicon(url: url).getFavicon(size: .xl, width: 24)
                 .frame(width: 24, height: 24)
-                .cornerRadius(4)
+                .clipShape(InterfaceStyle.roundedRectangle)
             Link(
                 self.title ?? self.url.absoluteString,
                 destination: self.url

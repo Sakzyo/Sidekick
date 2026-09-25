@@ -3,6 +3,9 @@
    macOS while remaining fast to repaint during streaming. */
 
 :root {
+    /* Matches InterfaceStyle.cornerRadius in the native UI. */
+    --sk-corner-radius: 22px;
+    --sk-button-corner-radius: 8px;
     --md-font-size: 14px;
     --md-line-height: 1.55;
     --md-fg: #1c1c1e;
@@ -144,7 +147,7 @@ body {
 .markdown-body :not(pre) > code {
     background: var(--md-code-bg);
     padding: 1.5px 5px;
-    border-radius: 4px;
+    border-radius: var(--sk-corner-radius);
     white-space: break-spaces;
 }
 
@@ -152,7 +155,7 @@ body {
     margin: 0 0 12px 0;
     padding: 12px 14px;
     background: var(--md-code-block-bg);
-    border-radius: 8px;
+    border-radius: var(--sk-corner-radius);
     overflow-x: auto;
     line-height: 1.45;
 }
@@ -185,7 +188,7 @@ body {
 
 .markdown-body img {
     max-width: 100%;
-    border-radius: 6px;
+    border-radius: var(--sk-corner-radius);
 }
 
 /* KaTeX font scale tweak — match surrounding body. */
@@ -261,7 +264,7 @@ body[data-mode="reasoning"] .md-block.md-new {
 /* ---- Code block chrome (language label, copy, expand/collapse) ---- */
 .markdown-body .sk-codeblock {
     margin: 0 0 12px 0;
-    border-radius: 8px;
+    border-radius: var(--sk-corner-radius);
     background: var(--md-code-block-bg);
     border: 1px solid var(--md-border);
     overflow: hidden;
@@ -296,7 +299,7 @@ body[data-mode="reasoning"] .md-block.md-new {
     appearance: none;
     background: transparent;
     border: 1px solid transparent;
-    border-radius: 5px;
+    border-radius: var(--sk-button-corner-radius);
     /* Square hit area sized so 14px icons look balanced. */
     width: 24px;
     height: 24px;

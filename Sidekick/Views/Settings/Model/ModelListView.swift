@@ -124,7 +124,7 @@ struct ModelListView: View {
         .padding(5)
         .padding(.horizontal, 5)
         .background {
-            RoundedRectangle(cornerRadius: 7)
+            InterfaceStyle.roundedRectangle
                 .fill(
                     Color.secondary.opacity(self.hoveringAdd ? 0.15 : 0)
                 )
@@ -149,7 +149,7 @@ struct ModelListView: View {
         .padding(.top, 4)
         .padding(.horizontal, 5)
         .background {
-            RoundedRectangle(cornerRadius: 7)
+            InterfaceStyle.roundedRectangle
                 .fill(
                     Color.secondary.opacity(self.hoveringDownload ? 0.15 : 0)
                 )

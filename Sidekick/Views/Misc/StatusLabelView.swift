@@ -35,7 +35,7 @@ struct StatusLabelView: View {
 			.padding(2)
 			.padding(.horizontal, 2)
 			.overlay {
-				RoundedRectangle(cornerRadius: 4)
+				InterfaceStyle.roundedRectangle
 					.fill(fill.opacity(0.2))
 					.strokeBorder(fill, lineWidth: 1)
 			}

@@ -39,7 +39,7 @@ public struct ReferencedURL: Codable, Equatable, Hashable {
 			.padding(4)
 			.padding(.horizontal, 2)
 			.background {
-				Capsule()
+				InterfaceStyle.chatButtonShape
 					.stroke(lineWidth: 1)
 			}
 			.draggable(self.url)

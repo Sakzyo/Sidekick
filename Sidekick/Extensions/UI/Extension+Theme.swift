@@ -116,7 +116,7 @@ extension Theme {
 			}
 			.blockquote { configuration in
 				HStack(spacing: 0) {
-					RoundedRectangle(cornerRadius: 6, style: .continuous)
+					InterfaceStyle.roundedRectangle
 						.fill(Color.border)
 						.relativeFrame(width: .em(0.2))
 					configuration.label

@@ -26,7 +26,7 @@ struct ChatPromptEditor<Options: View>: View {
     var useAttachments: Bool = true
     var useDictation: Bool = true
     
-    var cornerRadius = 16.0
+    var cornerRadius = InterfaceStyle.cornerRadius
     @ViewBuilder var options: () -> Options
     var rect: RoundedRectangle {
         RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)

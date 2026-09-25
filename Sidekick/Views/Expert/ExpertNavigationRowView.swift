@@ -29,7 +29,7 @@ struct ExpertNavigationRowView: View {
 		.padding(.leading, 4)
 		.padding(.trailing)
 		.background {
-			RoundedRectangle(cornerRadius: 7)
+			InterfaceStyle.roundedRectangle
 				.fill(self.expert.color)
 				.shadow(radius: 1.0)
 		}

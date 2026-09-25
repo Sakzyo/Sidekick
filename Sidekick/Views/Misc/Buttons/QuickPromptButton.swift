@@ -30,11 +30,11 @@ struct QuickPromptButton: View {
 					alignment: .leading
 				)
 				.background {
-					RoundedRectangle(cornerRadius: 9, style: .continuous)
+					InterfaceStyle.chatButtonShape
 						.fill(Color(nsColor: .controlBackgroundColor).opacity(isHovered ? 1 : 0.6))
 				}
 				.overlay {
-					RoundedRectangle(cornerRadius: 9, style: .continuous)
+					InterfaceStyle.chatButtonShape
 						.strokeBorder(Color.primary.opacity(0.08), lineWidth: 1)
 				}
 		}

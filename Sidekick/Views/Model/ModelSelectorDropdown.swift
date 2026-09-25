@@ -365,7 +365,7 @@ struct ModelSelectorDropdown: View {
             }
             .padding(10)
             .background(Color(.controlBackgroundColor))
-            .cornerRadius(10)
+            .clipShape(InterfaceStyle.roundedRectangle)
             .padding([.horizontal, .top], 12)
             .padding(.bottom, 8)
             
@@ -649,7 +649,7 @@ struct LocalModelRow: View {
         }
         .buttonStyle(.plain)
         .background(
-            RoundedRectangle(cornerRadius: 4)
+            InterfaceStyle.chatButtonShape
                 .fill(
                     shouldHighlight ? Color.accentColor.opacity(0.25) : Color.clear
                 )
@@ -703,7 +703,7 @@ struct RemoteModelRow: View {
         }
         .buttonStyle(.plain)
         .background(
-            RoundedRectangle(cornerRadius: 4)
+            InterfaceStyle.chatButtonShape
                 .fill(
                     shouldHighlight ? Color.accentColor.opacity(0.25) : Color.clear
                 )

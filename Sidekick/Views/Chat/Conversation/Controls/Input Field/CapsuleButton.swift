@@ -45,9 +45,9 @@ struct CapsuleButton: View {
     
     var capsule: some View {
         ZStack {
-            Capsule()
+            InterfaceStyle.chatButtonShape
                 .fill(self.bubbleColor)
-            Capsule()
+            InterfaceStyle.chatButtonShape
                 .stroke(
                     style: .init(
                         lineWidth: 0.3

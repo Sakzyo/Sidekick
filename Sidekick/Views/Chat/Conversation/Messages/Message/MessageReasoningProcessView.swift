@@ -90,7 +90,7 @@ struct MessageReasoningProcessView: View {
             }
         }
         .background {
-            RoundedRectangle(cornerRadius: 7)
+            InterfaceStyle.chatButtonShape
                 .fill(Color.purple.opacity(0.2))
         }
     }

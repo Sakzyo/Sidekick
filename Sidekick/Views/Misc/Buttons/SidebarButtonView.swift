@@ -37,7 +37,7 @@ struct SidebarButtonView: View {
 				Color.gray.opacity(self.buttonOpacity)
 			)
 			.clipShape(
-				RoundedRectangle(cornerRadius: 7)
+				InterfaceStyle.roundedRectangle
 			)
 		}
 		.buttonStyle(.plain)

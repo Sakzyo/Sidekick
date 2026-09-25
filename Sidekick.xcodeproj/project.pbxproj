@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BDBA32C7A11F48218C5DD001 /* InterfaceStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = BDBA32C7A11F48218C5DD002 /* InterfaceStyle.swift */; };
 		2000EDF82DC9B868006F9A95 /* ArgumentSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000EDF72DC9B868006F9A95 /* ArgumentSliderView.swift */; };
 		2000EDFA2DC9B971006F9A95 /* ArgumentPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000EDF92DC9B971006F9A95 /* ArgumentPickerView.swift */; };
 		2000EE922DCADB0E006F9A95 /* WebScrape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2000EE912DCADB0E006F9A95 /* WebScrape.swift */; };
@@ -494,6 +495,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		BDBA32C7A11F48218C5DD002 /* InterfaceStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterfaceStyle.swift; sourceTree = "<group>"; };
 		2000EDF72DC9B868006F9A95 /* ArgumentSliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentSliderView.swift; sourceTree = "<group>"; };
 		2000EDF92DC9B971006F9A95 /* ArgumentPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArgumentPickerView.swift; sourceTree = "<group>"; };
 		2000EE912DCADB0E006F9A95 /* WebScrape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebScrape.swift; sourceTree = "<group>"; };
@@ -1979,6 +1981,7 @@
 				20573F352CB53878004C19FE /* CircleMenuStyle.swift */,
 				20E48C252CB560730085E7D6 /* ChatStyle.swift */,
 				2099BDA22CB7EB0200E02732 /* CapsuleButtonStyle.swift */,
+				BDBA32C7A11F48218C5DD002 /* InterfaceStyle.swift */,
 			);
 			path = Styles;
 			sourceTree = "<group>";
@@ -2537,6 +2540,7 @@
 				20573F252CB52EB6004C19FE /* CopyButton.swift in Sources */,
 				20B4D6AF2CC3C12C00817E15 /* PromptController.swift in Sources */,
 				2099BDA32CB7EB0200E02732 /* CapsuleButtonStyle.swift in Sources */,
+				BDBA32C7A11F48218C5DD001 /* InterfaceStyle.swift in Sources */,
 				2090A8A62D8995FA0060DC63 /* ModelType.swift in Sources */,
 				204C79562CB765D700EED58E /* ExpertSelectionMenu.swift in Sources */,
 				209370942D6B598500E1AF73 /* Extension+CaseIterable.swift in Sources */,

@@ -28,12 +28,7 @@ extension Message {
                                 maxHeight: 350
                             )
                             .clipShape(
-                                UnevenRoundedRectangle(
-                                    topLeadingRadius: 0,
-                                    bottomLeadingRadius: 13,
-                                    bottomTrailingRadius: 13,
-                                    topTrailingRadius: 13
-                                )
+                                InterfaceStyle.roundedRectangle
                             )
                             .draggable(
                                 Image(

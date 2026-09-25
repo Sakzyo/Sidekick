@@ -50,7 +50,7 @@ struct ToggleLaTeXButton: View {
 		}
 		.foregroundStyle(Color.secondary)
 		.background {
-			Capsule()
+			InterfaceStyle.chatButtonShape
 				.stroke(
 					Color.secondary,
 					lineWidth: 1.0

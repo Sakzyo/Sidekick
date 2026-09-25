@@ -149,8 +149,7 @@ struct PromptInputField: View {
         return ChatPromptEditor(
             isFocused: self._isFocused,
             isRecording: $promptController.isRecording,
-            useAttachments: true,
-            cornerRadius: 22
+            useAttachments: true
         ) {
             WrappingHStack(alignment: .leading, horizontalSpacing: 8, verticalSpacing: 8) {
                 ModelSelectorDropdown(serverModelName: self.$serverModelName)

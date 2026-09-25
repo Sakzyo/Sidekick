@@ -76,7 +76,7 @@ struct PerformanceGaugeView: View {
 		) { proxy in
 			scaleLine
 				.clipShape(
-					Capsule()
+					InterfaceStyle.roundedRectangle
 				)
 					.overlay(alignment: .leading) {
 						Group {

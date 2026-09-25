@@ -165,7 +165,7 @@ struct ModelSelectionView: View {
 			.padding(10)
 			.frame(maxWidth: 420)
 			.background(
-				RoundedRectangle(cornerRadius: 8)
+				InterfaceStyle.roundedRectangle
 					.fill(Color.secondary.opacity(0.15))
 			)
 			.padding(.top, 6)
@@ -257,7 +257,7 @@ struct ModelSelectionView: View {
 		.padding(12)
 		.frame(maxWidth: 420)
 		.background(
-			RoundedRectangle(cornerRadius: 8)
+			InterfaceStyle.roundedRectangle
 				.fill(Color.secondary.opacity(0.15))
 		)
 	}

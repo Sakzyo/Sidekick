@@ -49,12 +49,12 @@ public struct StepChainLinkView: View {
     
     var topRadius: CGFloat {
         let isFirstStep = step == DeepResearchAgent.Step.allCases.first
-        return isFirstStep ? 4.5 / 2 : 0
+        return isFirstStep ? InterfaceStyle.cornerRadius : 0
     }
     
     var bottomRadius: CGFloat {
         let isLastStep = step == DeepResearchAgent.Step.allCases.last
-        return isLastStep ? 4.5 / 2 : 0
+        return isLastStep ? InterfaceStyle.cornerRadius : 0
     }
     
     var textColor: Color {

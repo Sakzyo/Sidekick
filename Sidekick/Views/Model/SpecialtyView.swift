@@ -59,7 +59,7 @@ struct SpecialtyView: View {
 		}
 		.padding(8)
 		.background {
-			RoundedRectangle(cornerRadius: 7)
+			InterfaceStyle.roundedRectangle
 				.fill(Color.secondary.opacity(0.15))
 				.frame(minHeight: 25)
 		}

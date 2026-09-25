@@ -20,7 +20,7 @@ struct ChatFieldStyle: TextFieldStyle {
 	/// A `Bool` controlling whether space is reserved for options below the text field
 	var bottomOptions: Bool = false
 	
-	var cornerRadius = 16.0
+	var cornerRadius = InterfaceStyle.cornerRadius
 	var rect: RoundedRectangle {
 		RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
 	}
@@ -59,7 +59,7 @@ struct ChatFieldStyle: TextFieldStyle {
 					.padding(.bottom, 30)
 			}
 			.padding(8)
-			.cornerRadius(cornerRadius)
+			.clipShape(InterfaceStyle.roundedRectangle)
 			.background(
 				LinearGradient(
 					colors: [
@@ -85,7 +85,7 @@ struct ChatFieldStyle: TextFieldStyle {
 
 struct ChatButtonStyle: ButtonStyle {
     
-    let cornerRadius = 30.0
+    let cornerRadius = InterfaceStyle.chatButtonCornerRadius
     var rect: RoundedRectangle {
         RoundedRectangle(cornerRadius: cornerRadius, style: .continuous)
     }
@@ -93,7 +93,7 @@ struct ChatButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .bold()
-            .cornerRadius(cornerRadius)
+            .clipShape(InterfaceStyle.chatButtonShape)
             .background(
                 LinearGradient(
                     colors: [

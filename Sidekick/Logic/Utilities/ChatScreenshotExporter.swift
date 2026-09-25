@@ -414,11 +414,11 @@ private struct ScreenshotProgressView: View {
         .padding(.vertical, 16)
         .frame(width: 320, alignment: .leading)
         .background(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
+            InterfaceStyle.roundedRectangle
                 .fill(.regularMaterial)
         )
         .overlay(
-            RoundedRectangle(cornerRadius: 14, style: .continuous)
+            InterfaceStyle.roundedRectangle
                 .strokeBorder(.white.opacity(0.08), lineWidth: 0.5)
         )
         .shadow(color: .black.opacity(0.35), radius: 18, x: 0, y: 6)
