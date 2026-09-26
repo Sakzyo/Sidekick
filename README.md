@@ -15,11 +15,11 @@ Sidekick is a native macOS app for chatting with local models, working with your
 
 This fork of [the original Sidekick](https://github.com/johnbean393/Sidekick) adds a **Codex-inspired chat interface**: a wider conversation sidebar, centered messages, a quieter toolbar, and model selection inside the chat box alongside Search, Functions, and supported reasoning controls. Press **Command-K** to choose a model or **Command-N** to start a chat. The current source includes more subtle button corners scaled to the larger chat box.
 
-The published release is [**v1.0.0, build 39**](https://github.com/Sakzyo/Sidekick/releases/tag/v1.0.0) for Apple Silicon and macOS 15.0 or later. The button-radius refinements described above were added after that DMG was published and are available by building the current source. Sidekick supports GGUF model families such as Qwen3.5 through its bundled backend; model size and compatibility determine what can run on your Mac.
+The latest prerelease is [**v1.0.0-rc.2, build 40**](https://github.com/Sakzyo/Sidekick/releases/tag/v1.0.0-rc.2) for Apple Silicon and macOS 15.0 or later, including the latest button-radius refinements. The existing [**v1.0.0, build 39**](https://github.com/Sakzyo/Sidekick/releases/tag/v1.0.0) remains available. Sidekick supports GGUF model families such as Qwen3.5 through its bundled backend; model size and compatibility determine what can run on your Mac.
 
 ![Current Sidekick chat interface with the model selector inside the composer](Docs%20Images/Current/chat.jpg)
 
-*Screenshots show a local build of the current source, captured on 25 September 2026. The published v1.0.0 DMG predates the latest button-corner refinements.*
+*Screenshots show a local build captured on 25 September 2026. RC2 includes these button-corner refinements; the original v1.0.0 DMG predates them.*
 
 ## Example Use
 
@@ -31,7 +31,7 @@ Open a reference below the answer to inspect the source in your viewer. Retrieva
 
 ## Features
 
-The sections below describe the current app. The [original project's feature guides](Markdown/Features/) provide additional background, while [this fork's release notes](docs/releases/1.0.0.md) describe the published v1.0.0 build.
+The sections below describe the current app. The [original project's feature guides](Markdown/Features/) provide additional background, while [this fork's RC2 release notes](docs/releases/1.0.0-rc.2.md) describe the current prerelease and its known limitations.
 
 ### Resource Use
 
@@ -146,11 +146,11 @@ This repository does not provide a Homebrew cask for its builds. Install this fo
 
 ### Download and Setup
 
-- Download `Sidekick-1.0.0-arm64.dmg` from [the v1.0.0 release](https://github.com/Sakzyo/Sidekick/releases/tag/v1.0.0). The release also includes a SHA-256 checksum file.
-- Open the DMG and drag **Sidekick** to **Applications**. This build is **ad hoc signed and not notarized**, so macOS Gatekeeper may block a downloaded copy. See the [release notes](docs/releases/1.0.0.md) for the distribution details.
+- Download `Sidekick-1.0.0-rc.2-arm64.dmg` from [the RC2 prerelease](https://github.com/Sakzyo/Sidekick/releases/tag/v1.0.0-rc.2). The release also includes a SHA-256 checksum file; the [original v1.0.0 download](https://github.com/Sakzyo/Sidekick/releases/tag/v1.0.0) remains available.
+- Open the DMG and drag **Sidekick** to **Applications**, quitting any running copy before replacing it. This build is **ad hoc signed and not notarized**, so macOS Gatekeeper may block a downloaded copy. See the [RC2 release notes](docs/releases/1.0.0-rc.2.md) for the distribution details.
 - Launch Sidekick and download a recommended model, select **Use GGUF model**, or choose **Use model server** to configure an API endpoint.
 - Click **New Chat** in the sidebar, choose a model inside the chat box, and enter a message. Use the adjacent Search and Functions controls to enable those features.
-- Build from the current source to try the button-corner refinements added after the published DMG.
+- Get updates to this fork from its GitHub releases; the inherited in-app updater uses the original project's feed.
 
 ## Goals
 

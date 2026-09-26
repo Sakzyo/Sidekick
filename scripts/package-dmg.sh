@@ -5,8 +5,13 @@ set -euo pipefail
 project_root="$(cd "$(dirname "$0")/.." && pwd)"
 source_app="${1:?Usage: scripts/package-dmg.sh /path/to/Release/Sidekick.app}"
 version="$(/usr/libexec/PlistBuddy -c 'Print :CFBundleShortVersionString' "$source_app/Contents/Info.plist")"
-if [[ "$version" != "1.0.0" ]]; then
-    echo "Expected Sidekick 1.0.0, found $version" >&2
+if [[ ! "$version" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-rc\.[0-9]+)?$ ]]; then
+    echo "Expected a stable or release-candidate version, found $version" >&2
+    exit 1
+fi
+release_notes="$project_root/docs/releases/$version.md"
+if [[ ! -f "$release_notes" ]]; then
+    echo "Missing release notes: $release_notes" >&2
     exit 1
 fi
 if [[ "$(/usr/bin/lipo -archs "$source_app/Contents/MacOS/Sidekick")" != "arm64" ]]; then
@@ -40,7 +45,7 @@ done < <(/usr/bin/find "$app/Contents" -depth -type d \( -name '*.framework' -o 
 /usr/bin/codesign --verify --deep --strict "$app"
 
 /bin/ln -s /Applications "$image_root/Applications"
-/bin/cp "$project_root/docs/releases/1.0.0.md" "$image_root/Release Notes.md"
+/bin/cp "$release_notes" "$image_root/Release Notes.md"
 image_name="Sidekick-$version-arm64.dmg"
 /usr/bin/hdiutil create -volname "Sidekick $version" -srcfolder "$image_root" -format UDZO -ov "$project_root/dist/$image_name"
 /usr/bin/hdiutil verify "$project_root/dist/$image_name"
